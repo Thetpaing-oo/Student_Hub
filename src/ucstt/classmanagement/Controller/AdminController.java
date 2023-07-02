@@ -1,5 +1,5 @@
 package ucstt.classmanagement.Controller;
 
-public class SampleClassController {
+public class AdminController {
 
 }

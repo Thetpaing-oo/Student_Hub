@@ -163,5 +163,6 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+    <script src="js/intro.js"></script>
 </body>
 </html>

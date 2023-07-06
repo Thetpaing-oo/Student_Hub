@@ -41,9 +41,14 @@
 <body>
 
 <div class="container">
+<div class="h-15 p-3">
   <h2><div class="d-flex justify-content-center" style="background-color:#33FF99;color:#FBFBFD">University of Computer Studies - THATON</div></h2>
+  </div>
+  <div class="h-15 p-3">
   <h4><div class="d-flex justify-content-center">Login/Signup as</div></h4>
   <div class="d-flex justify-content-center"><div class="text-muted">Tell Us About U</div></div>
+  </div>
+  <div class="h-70 p-3">
   <div class="row mt-2">
     <div class="col-12">
       <form>

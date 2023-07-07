@@ -35,6 +35,7 @@
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
     <link href="css/register.css" rel="stylesheet" media="all">
+
 </head>
 </head>
 <body>
@@ -42,31 +43,32 @@
   <form>
     <div class="row jumbotron box8">
       <div class="col-sm-12 mx-t3 mb-4">
-        <h2 class="text-center text-info">Register</h2>
+        <h2 class="text-center text-info">Registration</h2>
+        <div style="height:3px;background-color:#3B9C9C;margin-top:10px;"></div>
       </div>
       <div class="col-sm-6 form-group">
-        <label for="name-f">First Name</label>
+        <label for="name-f">First Name</label><sup style="color:red;">*</sup>
         <input type="text" class="form-control" name="fname" id="name-f" placeholder="Enter your first name." required>
       </div>
       <div class="col-sm-6 form-group">
-        <label for="name-l">Last name</label>
+        <label for="name-l">Last name</label><sup style="color:red;">*</sup>
         <input type="text" class="form-control" name="lname" id="name-l" placeholder="Enter your last name." required>
       </div>
       <div class="col-sm-6 form-group">
-        <label for="email">Email</label>
+        <label for="email">Email</label><sup style="color:red;">*</sup>
         <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email." required>
       </div>
       <div class="col-sm-6 form-group">
-        <label for="address-1">Address Line-1</label>
-        <input type="address" class="form-control" name="Locality" id="address-1" placeholder="Locality/House/Street no." required>
+        <label for="address-1">Address Line-1</label><sup style="color:red;">*</sup>
+        <input type="address" class="form-control" name="locality" id="address-1" placeholder="Locality/House/Street no." required>
       </div>
       <div class="col-sm-6 form-group">
-        <label for="address-2">Address Line-2</label>
+        <label for="address-2">Address Line-2</label><sup style="color:red;">*</sup>
         <input type="address" class="form-control" name="address" id="address-2" placeholder="Village/City Name." required>
       </div>
       <div class="col-sm-4 form-group">
-        <label for="State">State</label>
-        <input type="address" class="form-control" name="State" id="State" placeholder="Enter your state name." required>
+        <label for="State">State</label><sup style="color:red;">*</sup>
+        <input type="address" class="form-control" name="state" id="State" placeholder="Enter your state name." required>
       </div>
       <div class="col-sm-2 form-group">
         <label for="zip">Postal-Code</label>
@@ -322,12 +324,12 @@
         </select>
       </div>
       <div class="col-sm-6 form-group">
-        <label for="Date">Date Of Birth</label>
+        <label for="Date">Date Of Birth</label><sup style="color:red;">*</sup>
         <input type="Date" name="dob" class="form-control" id="Date" placeholder="" required>
       </div>
       <div class="col-sm-6 form-group">
-        <label for="sex">Gender</label>
-        <select id="sex" class="form-control browser-default custom-select">
+        <label for="sex">Gender</label><sup style="color:red;">*</sup>
+        <select id="sex" class="form-control browser-default custom-select" name="sex">
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="unspesified">Unspecified</option>
@@ -555,24 +557,54 @@
         </select>
       </div>
       <div class="col-sm-4 form-group">
-        <label for="tel">Phone</label>
+        <label for="tel">Phone</label><sup style="color:red;">*</sup>
         <input type="tel" name="phone" class="form-control" id="tel" placeholder="Enter Your Contact Number." required>
       </div>
       <div class="col-sm-6 form-group">
-        <label for="pass">Password</label>
+        <label for="pass">Password</label><sup style="color:red;">*</sup>
         <input type="Password" name="password" class="form-control" id="pass" placeholder="Enter your password." required>
       </div>
       <div class="col-sm-6 form-group">
-        <label for="pass2">Confirm Password</label>
+        <label for="pass2">Confirm Password</label><sup style="color:red;">*</sup>
         <input type="Password" name="cnf-password" class="form-control" id="pass2" placeholder="Re-enter your password." required>
       </div>
+      <div class="col-sm-6 form-group">
+        <label for="sex">Gender</label><sup style="color:red;">*</sup>
+        <select id="role" class="form-control browser-default custom-select" name="role" required>
+        <option value=""></option>
+          <option value="admin">Administrator</option>
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+        </select>
+      </div>
       <div class="col-sm-12">
-        <input type="checkbox" class="form-check d-inline" id="chb" required><label for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.
+        <input type="checkbox" class="form-check d-inline" id="chb" required><label for="chb" class="form-check-label text-primary">&nbsp;I accept all terms and conditions.
         </label>
       </div>
 
       <div class="col-sm-12 form-group mb-0">
-        <button class="btn btn-primary float-right">Submit</button>
+      <div class="row">
+      <div class="col-md-10"></div>
+      <div class="modal fade left" id="ModalWarning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-warning modal-side modal-top-left" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+       <div class="modal-header">
+       <div style="width:5px;background-color:green;">&nbsp;</div>
+        <p class="heading">&nbsp;&nbsp;&nbsp;Successfully registered.</p> <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="white-text" style="color:red;">&times;</span>
+        </button></div>
+        </div>
+        <div class="modal-body"><h4></h4>
+        <!-- <div class="modal-footer justify-content-center"><button  class="btn btn-primary">OK</button></div> -->
+        </div>
+        </div>
+  </div>
+      <div class="col-md-1"><button class="btn btn-primary float-right" formaction="" formmethod="get" data-toggle="modal" data-target="#ModalWarning">Submit</button></div>
+      <div class="col-md-1"><button class="btn btn-primary float-right" formaction="" formmethod="get" type="button">Cancel</button></div>
+      </div>
       </div>
 
     </div>
@@ -605,5 +637,6 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+
 </body>
 </html>

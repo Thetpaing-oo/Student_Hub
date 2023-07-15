@@ -33,7 +33,6 @@
     <link href="vendor/vector-map/jqvmap.min.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="css/theme.css" rel="stylesheet" media="all">
     <link href="css/login.css" rel="stylesheet" media="all">
 </head>
 </head>
@@ -99,6 +98,5 @@
     <script src="vendor/vector-map/jquery.vmap.world.js"></script>
 
     <!-- Main JS-->
-    <script src="js/main.js"></script>
 </body>
 </html>

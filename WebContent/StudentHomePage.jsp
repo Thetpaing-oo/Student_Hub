@@ -36,7 +36,24 @@
     <link href="css/theme.css" rel="stylesheet" media="all">
 
 </head>
-<body class="container">
+<body>
+<script type="text/javascript">
+try {
+    var arrow = $('.js-arrow');
+    arrow.each(function () {
+      var that = $(this);
+      that.on('click', function (e) {
+        e.preventDefault();
+        that.find(".arrow").toggleClass("up");
+        that.toggleClass("open");
+        that.parent().find('.js-sub-list').slideToggle("250");
+      });
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+</script>
     <div class="page-wrapper">
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar2">
@@ -70,7 +87,7 @@
                                 <i class="fas fa-shopping-basket"></i>Attendence</a>
                         </li>
                         <li class="has-sub">
-                           <!--  <a class="js-arrow" href="#">
+                           <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Setting
                                 <span class="arrow">
                                     <i class="fas fa-angle-down"></i>
@@ -78,32 +95,14 @@
                             </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="login.html">
+                                    <a href="login.jsp">
                                         <i class="fas fa-sign-in-alt"></i>Logout</a>
                                 </li>
                                 <li>
                                     <a href="forget-pass.html">
                                         <i class="fas fa-unlock-alt"></i>Forget Password</a>
                                 </li>
-                            </ul> -->
-                            <div class="btn-group">
-  <button class="btn btn-primary btn-lg" type="button">Large split button</button>
-  <button
-    type="button"
-    class="btn btn-lg btn-primary dropdown-toggle dropdown-toggle-split"
-    data-mdb-toggle="dropdown"
-    aria-expanded="false"
-  >
-    <span class="visually-hidden">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-    <li><hr class="dropdown-divider" /></li>
-    <li><a class="dropdown-item" href="#">Separated link</a></li>
-  </ul>
-</div>
+                            </ul>
                         </li>
                     </ul>
                 </nav>

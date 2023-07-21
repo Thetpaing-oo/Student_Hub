@@ -15,7 +15,7 @@ public class userDAO {
 	public userDAO() {}
 
 	public void insertion(User user) {
-		String query="insert into user(id,username,email,password,phone,role,gender,address,del_flag,creation_by,creation_timestamp,update_by,updatation_timestamp)"+"values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String query="insert into m_user(id,username,email,password,phone,role,gender,address,del_flag,creation_by,creation_timestamp,update_by,updatation_timestamp)"+"values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement preparedStatement=DBUtility.getPreparedStatement(connection, query);
 		try {
 			preparedStatement.setString(1,user.getId());
@@ -40,7 +40,7 @@ public class userDAO {
 	}
 
 	public void updationByPK(User user) {
-		String query="update user set email=?,password=? where admin_name=?";
+		String query="update m_user set email=?,password=? where admin_name=?";
 		PreparedStatement preparedStatement=DBUtility.getPreparedStatement(connection, query);
 		try {
 			/*preparedStatement.setString(1,user.email);

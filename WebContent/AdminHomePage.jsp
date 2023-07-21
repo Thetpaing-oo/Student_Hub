@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="en">
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -36,24 +36,8 @@
     <link href="css/theme.css" rel="stylesheet" media="all">
 
 </head>
-<body>
-<script type="text/javascript">
-try {
-    var arrow = $('.js-arrow');
-    arrow.each(function () {
-      var that = $(this);
-      that.on('click', function (e) {
-        e.preventDefault();
-        that.find(".arrow").toggleClass("up");
-        that.toggleClass("open");
-        that.parent().find('.js-sub-list').slideToggle("250");
-      });
-    });
 
-  } catch (error) {
-    console.log(error);
-  }
-</script>
+<body>
     <div class="page-wrapper">
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar2">
@@ -69,25 +53,29 @@ try {
                         <img src="images/icon/avatar-big-01.jpg" alt="John Doe" />
                     </div>
                     <h4 class="name">john doe</h4>
-                    <a href="#">Student</a>
+                    <a href="#">Sign out</a>
                 </div>
                 <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="index2.html">
+                            <a class="js-arrow" href="AdminHomePage.jsp">
                                 <i class="fas fa-tachometer-alt"></i>Home
                             </a>
                         </li>
                         <li>
-                            <a href="inbox.html">
-                                <i class="fas fa-chart-bar"></i>Timetables</a>
+                            <a href="ADM_UserManage.jsp">
+                                <i class="fas fa-chart-bar"></i>User Managing</a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fas fa-shopping-basket"></i>Attendence</a>
+                            <a href="ADM_TimetableManage.jsp">
+                                <i class="fas fa-shopping-basket"></i>Timetable Managing</a>
+                        </li>
+                        <li>
+                            <a href="ADM_ClassManage.jsp">
+                                <i class="fas fa-shopping-basket"></i>Class Managing</a>
                         </li>
                         <li class="has-sub">
-                           <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Setting
                                 <span class="arrow">
                                     <i class="fas fa-angle-down"></i>
@@ -95,12 +83,12 @@ try {
                             </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="login.jsp">
+                                    <a href="login.html">
                                         <i class="fas fa-sign-in-alt"></i>Logout</a>
                                 </li>
                                 <li>
                                     <a href="forget-pass.html">
-                                        <i class="fas fa-unlock-alt"></i>Forget Password</a>
+                                        <i class="fas fa-unlock-alt"></i>Change Password</a>
                                 </li>
                             </ul>
                         </li>
@@ -120,7 +108,7 @@ try {
                             <h4 style="color:aliceblue;">Class Management Application</h4>
                             <div style="margin-left: 100px;"></div>
                             <div class="header-button2">
-                                <div class="header-button-item js-item-menu">
+                                <!--<div class="header-button-item js-item-menu">
                                     <i class="zmdi zmdi-search"></i>
                                     <div class="search-dropdown js-dropdown">
                                         <form action="">
@@ -130,7 +118,7 @@ try {
                                             </span>
                                         </form>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -147,8 +135,7 @@ try {
                         <div class="image img-cir img-120">
                             <img src="images/icon/avatar-big-01.jpg" alt="John Doe" />
                         </div>
-                        <h4 class="name">john doe</h4>
-                        <a href="#">Student</a>
+                        <h4 class="name">Administrator</h4>
                     </div>
 
                 </div>
@@ -274,7 +261,7 @@ try {
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item">
-                                    <h2 class="number">Activities 3</h2>
+                                    <h2 class="number">ACtivities 3</h2>
                                     <span class="desc">this week</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
@@ -343,4 +330,6 @@ try {
     <script src="js/main.js"></script>
 
 </body>
+
 </html>
+<!-- end document-->

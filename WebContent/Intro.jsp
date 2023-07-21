@@ -51,7 +51,7 @@
   <div class="h-70 p-3">
   <div class="row mt-2">
     <div class="col-12">
-      <form>
+      <form action="/Student_Hub/IntroServlet" method="get">
         <div class="form-group row">
           <div class="col-12">
             <div class="card-deck">
@@ -59,7 +59,7 @@
                 <div class="card-body" role="button">
                   <h5 class="card-title">
                       <div class="round">
-    <input id="admin" type="checkbox" id="checkbox" />
+    <input id="admin" type="checkbox" id="checkbox" name="admin" />
     <label for="admin"></label>
   </div>
 
@@ -85,7 +85,7 @@
                 <div class="card-body" role="button">
                   <h5 class="card-title">
                      <div class="round">
-    <input id="teacher" type="checkbox" id="checkbox" />
+    <input id="teacher" type="checkbox" id="checkbox" name="teacher"/>
     <label for="teacher"></label>
   </div>
                   </h5>
@@ -110,7 +110,7 @@
                 <div class="card-body" role="button">
                   <h5 class="card-title">
                   <div class="round">
-    <input id="student" type="checkbox" id="checkbox" />
+    <input id="student" type="checkbox" id="checkbox" name="student"/>
     <label for="student"></label>
   </div>
                   </h5>
@@ -135,7 +135,7 @@
           </div>
         </div>
   <small>Not Already Have Registered?&nbsp;&nbsp;<a href="#"><u><i>Register</i></u></a></small>
-  <div class="d-flex justify-content-center"><button type="button" class="btn btn-md" style="color:white;background-color:seagreen;">&nbsp;&nbsp;&nbsp;Next&nbsp;&nbsp;&nbsp;</button></div>
+  <div class="d-flex justify-content-center"><button type="submit" class="btn btn-md" style="color:white;background-color:seagreen;">&nbsp;&nbsp;&nbsp;Next&nbsp;&nbsp;&nbsp;</button></div>
       </form>
     </div>
   </div>

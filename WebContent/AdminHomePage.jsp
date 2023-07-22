@@ -36,8 +36,170 @@
     <link href="css/theme.css" rel="stylesheet" media="all">
 
 </head>
+<style>
+/* Full-width input fields */
+.text_input_job {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #8dc5d0;
+  box-sizing: border-box;
+}
 
+/* Set a style for all buttons */
+.job_button {
+  background-color: #5cacbc;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius:25px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.job_button:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.job_container {
+  padding: 16px;
+}
+
+.detail_container{
+padding:16px;
+}
+
+.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.job_modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+.detail_modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.job_modal-content {
+  background-color: #fefefe;
+  margin: 5% 15% 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 3px solid #8dc5d0;
+  border-radius: 15px;
+  width: 50%; /* Could be more or less, depending on screen size */
+}
+
+.detail_modal-content {
+  background-color: #fefefe;
+  margin: 5% 15% 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 3px solid #8dc5d0;
+  border-radius: 15px;
+  width: 50%; /* Could be more or less, depending on screen size */
+}
+
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.job_animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+.detail_animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  .psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
 <body>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
     <div class="page-wrapper">
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar2">
@@ -53,7 +215,7 @@
                         <img src="images/icon/avatar-big-01.jpg" alt="John Doe" />
                     </div>
                     <h4 class="name">john doe</h4>
-                    <a href="#">Sign out</a>
+                    <a href="#">Administrator</a>
                 </div>
                 <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">
@@ -149,9 +311,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">School Activities</h2>
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
+                                    <h2 class="title-1">Campus Activities</h2>
+                                    <button class="au-btn au-btn-icon au-btn--blue" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">
+                                        <i class="zmdi zmdi-plus"></i>Post</button>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +322,65 @@
                 </div>
             </section>
             <!-- END BREADCRUMB-->
+            <div id="id01" class="detail_modal">
 
+  <form class="detail_modal-content detail_animate" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <h2>Campus Activity</h2>
+    </div>
+
+    <div class="detail_container">
+    <center>
+    <table cellspacing="30" cellpadding="30">
+    <tr>
+    <td><label for="caption"><b>Caption</b></label></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Enter caption" name="caption" class="text_input_job"></td>
+    </tr>
+    <tr>
+    <td><label for="caption"><b>Abstract</b></label></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Enter affair astraction" name="astract" class="text_input_job"></td>
+    </tr>
+    <tr>
+    <td><label for="affair"><b>Affair</b></label></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea name="affair" class="text_input_job">description...</textarea></td>
+    </tr>
+    <tr>
+    <td><label for="affair"><b>Happening Date&nbsp;</b></label></td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="date" type="date" class="text_input_job"></td>
+    </tr>
+    </table>
+    </center>
+      <button type="submit" onclick="document.getElementById('id01').style.display='none'" class="job_button">Upload</button>
+    </div>
+  </form>
+</div>
+<!-- Compus Activity Detail -->
+<div id="id02" class="job_modal">
+
+  <form class="job_modal-content job_animate" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <h2>Campus Activity</h2>
+    </div>
+
+    <div class="job_container">
+    <center>
+<div class="card w-100" style="width: 18rem;">
+<!--   <img class="card-img-top" src="images/icon/compus.jpg" alt="Card image cap"> -->
+  <div class="card-body">
+    <h5 class="card-title">Affair</h5>
+    <p class="card-text"><b>Celebration Individuality</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/icon/compus.jpg" alt="Card image cap" width="300px" height="300px;"></p>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item"><small>2028 Dec 1</small></li>
+    <li class="list-group-item"><div class="row"><div class="col-md-6"><img src="images/icon/compus1.png" alt="Card image cap" width="500px" height="800px;"></div><div class="col-md-6"><i>Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.Some quick example text to build on the card title and make up the bulk of the card's content.</i></div></div></li>
+  </ul>
+  </div>
+</div>
+    </center>
+    </div>
+  </form>
+</div>
             <!-- STATISTIC-->
             <section class="statistic">
                 <div class="section__content section__content--p30">
@@ -243,8 +463,9 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item">
-                                    <h2 class="number">Activities 1</h2>
-                                    <span class="desc">members online</span>
+                                    <h4 class="number">Celebrating in Compus like ....</h4>
+                                    <span class="desc">2028 - 08 - 8</span><br/>
+                                    <span class="btn btn-outline-primary btn-sm" onclick="document.getElementById('id02').style.display='block'">Detail >></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-account-o"></i>
                                     </div>

@@ -11,7 +11,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Student Home Page</title>
+    <title>Teacher Home Page</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -37,23 +37,6 @@
 
 </head>
 <body>
-<script type="text/javascript">
-try {
-    var arrow = $('.js-arrow');
-    arrow.each(function () {
-      var that = $(this);
-      that.on('click', function (e) {
-        e.preventDefault();
-        that.find(".arrow").toggleClass("up");
-        that.toggleClass("open");
-        that.parent().find('.js-sub-list').slideToggle("250");
-      });
-    });
-
-  } catch (error) {
-    console.log(error);
-  }
-</script>
     <div class="page-wrapper">
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar2">
@@ -69,7 +52,7 @@ try {
                         <img src="images/icon/avatar-big-01.jpg" alt="John Doe" />
                     </div>
                     <h4 class="name">john doe</h4>
-                    <a href="#">Student</a>
+                    <a href="#">Teacher</a>
                 </div>
                 <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">
@@ -79,11 +62,7 @@ try {
                             </a>
                         </li>
                         <li>
-                            <a href="inbox.html">
-                                <i class="fas fa-chart-bar"></i>Timetables</a>
-                        </li>
-                        <li>
-                            <a href="#">
+                            <a href="TR_Attandance.jsp">
                                 <i class="fas fa-shopping-basket"></i>Attendence</a>
                         </li>
                         <li class="has-sub">
@@ -148,7 +127,7 @@ try {
                             <img src="images/icon/avatar-big-01.jpg" alt="John Doe" />
                         </div>
                         <h4 class="name">john doe</h4>
-                        <a href="#">Student</a>
+                        <a href="#">Teacher</a>
                     </div>
 
                 </div>

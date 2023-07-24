@@ -18,7 +18,7 @@ public class DBUtility {
 	   try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		try {
-			connect=DriverManager.getConnection("jdbc:mysql://localhost:3306/stu_hub?autoReconnet=true&useSSL=false","root","root@mysql");
+			connect=DriverManager.getConnection("jdbc:mysql://localhost:3306/stu-hub?autoReconnet=true&useSSL=false&allowPublicKeyRetrieval=true","root","root@mysql");
 		} catch (SQLException e) {
 			System.out.println("Error : "+e);
 		}

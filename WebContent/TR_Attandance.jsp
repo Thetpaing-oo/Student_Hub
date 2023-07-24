@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="ucstt.classmanagement.*,java.util.*"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,8 +36,16 @@
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
 
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" type="text/javascript"></script>
+
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.get('FetchClassID');
+});
+</script>
     <div class="page-wrapper">
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar2">
@@ -62,7 +71,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="TR_Attandance.jsp">
                                 <i class="fas fa-shopping-basket"></i>Attendence</a>
                         </li>
                         <li class="has-sub">
@@ -149,12 +158,9 @@
                                         <div class="rs-select2--light rs-select2--md">
                                             <select class="js-select2" name="property">
                                                 <option selected="selected">Class code</option>
-                                                <option value="">Option 1</option>
-                                                <option value="">Option 2</option>
-                                                <option value="">Option 1</option>
-                                                <option value="">Option 2</option>
-                                                <option value="">Option 1</option>
-                                                <option value="">Option 2</option>
+                                                <c:forEach items="${classNoList}" var="data">
+                                                <option value="${data}">${data}</option>
+                                                </c:forEach>
                                             </select>
                                             <div class="dropDownSelect2"></div>
                                         </div>

@@ -1,3 +1,5 @@
+
+
 package ucstt.classmanagement.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,36 +9,88 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.cj.xdevapi.Statement;
+
 import ucstt.classmanagement.Model.User;
 import ucstt.classmanagement.Utility.DBUtility;
 
 public class userDAO {
 	Connection connection=DBUtility.getConnection();
 	public userDAO() {}
-
-	public void insertion(User user) {
-		String query="insert into user(id,username,email,password,phone,role,gender,address,del_flag,creation_by,creation_timestamp,update_by,updatation_timestamp)"+"values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		PreparedStatement preparedStatement=DBUtility.getPreparedStatement(connection, query);
+	
+	public String getMaxid() {
+		String query="select * from m_user where id =(select max(id) from m_user)";
+		PreparedStatement result=DBUtility.getPreparedStatement(connection, query);
+		String s=null;
 		try {
-			preparedStatement.setString(1,user.getId());
-			preparedStatement.setString(2,user.getUsername());
-			preparedStatement.setString(3,user.getEmail());
-			preparedStatement.setString(4,user.getPassword());
-			preparedStatement.setString(5,user.getPhone());
-			preparedStatement.setString(6,user.getRole());
-			preparedStatement.setString(7,user.getGender());
-			preparedStatement.setString(8,user.getAddress());
-			preparedStatement.setString(9,user.getDel_flag());
-			preparedStatement.setString(10,user.getCreation_by());
-			preparedStatement.setTimestamp(11,user.getCreation_timestamp());
-			preparedStatement.setString(12,user.getUpdate_by());
-			preparedStatement.setTimestamp(13,user.getUpdatation_timestamp());
-
-			preparedStatement.executeUpdate();
-			System.out.println("Insert successfully.");
+			ResultSet rs=result.executeQuery();
+			if(rs.next()) {
+				s=rs.getString("id");
+				return s;
+			}else {
+				System.out.println("no rs set");
+				return s;
+			}
 		} catch (SQLException e) {
-			System.out.println("Insert Data Failed.");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return s;
+		
+	}
+	
+	public boolean login(User user) {
+		String query="select * from m_user where email='"+user.getEmail()+"'";
+		PreparedStatement result=DBUtility.getPreparedStatement(connection, query);
+		try {
+			ResultSet rs=result.executeQuery();
+			if(rs.next()) {
+				String oldPass=rs.getString("password");
+				String pass=user.getPassword();
+				if(oldPass.equals(pass)) {
+					System.out.println("successfull");
+					return true;
+				}else {
+					System.out.println("pass not match");
+					return false;
+				}
+			}else {
+				System.out.println("no email exist");
+				return false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+	public boolean insertion(User user) {
+		String query="INSERT INTO m_user  (`id`, `username`, `email`, `password`, `phone`, `role`, `gender`, `address`) VALUES ('"+user.getId()+"','"+user.getUsername()+"', '"+user.getEmail()+"', '"+user.getPassword()+"', '"+user.getPhone()+"', '"+user.getRole()+"', '"+user.getGender()+"', '"+user.getAddress()+"')";
+		PreparedStatement result=DBUtility.getPreparedStatement(connection, "select * from m_user where email='"+user.getEmail()+"'");
+		try {
+			ResultSet rs=result.executeQuery();
+			if(rs.next()) {
+				System.out.println("account already exists");
+				return false;
+			}else {
+				PreparedStatement preparedStatement=DBUtility.getPreparedStatement(connection, query);
+				try {
+					preparedStatement.execute();
+					System.out.println("Successflly inserted");
+					return true;
+				} catch (SQLException e) {
+					System.out.println("error");
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+		
 	}
 
 	public void updationByPK(User user) {

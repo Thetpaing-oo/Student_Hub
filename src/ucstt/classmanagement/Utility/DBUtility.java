@@ -16,9 +16,9 @@ public class DBUtility {
    public static Connection getConnection(){
 	   Connection connect=null;
 	   try {
-		Class.forName("com.mysql.cj.jdbc.Driver");
+		Class.forName("com.mysql.jdbc.Driver");
 		try {
-			connect=DriverManager.getConnection("jdbc:mysql://localhost:3306/stu_hub?autoReconnet=true&useSSL=false","root","root@mysql");
+			connect=DriverManager.getConnection("jdbc:mysql://localhost:3306/stu_hub?autoReconnet=true&useSSL=false","root","root");
 		} catch (SQLException e) {
 			System.out.println("Error : "+e);
 		}

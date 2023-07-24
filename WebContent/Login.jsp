@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -51,9 +52,9 @@
 						<h2>Log In</h2>
 					</div>
 					<div class="row">
-						<form control="" class="form-group">
+						<form action="LoginServlet" control="" class="form-group">
 							<div class="row">
-								<input type="text" name="username" id="username" class="form__input" placeholder="Username">
+								<input type="email" name="email" id="username" class="form__input" placeholder="Email">
 							</div>
 							<div class="row">
 								<!-- <span class="fa fa-lock"></span> -->

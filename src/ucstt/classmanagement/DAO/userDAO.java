@@ -18,6 +18,33 @@ public class userDAO {
 	Connection connection=DBUtility.getConnection();
 	public userDAO() {}
 	
+	public ResultSet getTimetable() {
+		String query="select * from m_timetable";
+		PreparedStatement result=DBUtility.getPreparedStatement(connection, query);
+		try {
+			ResultSet rs=result.executeQuery();
+			return rs;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
+	public ResultSet getClassmangenent() {
+		String query="select * from m_class";
+		PreparedStatement result=DBUtility.getPreparedStatement(connection, query);
+		try {
+			ResultSet rs=result.executeQuery();
+			return rs;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 	public String getMaxid() {
 		String query="select * from m_user where id =(select max(id) from m_user)";
 		PreparedStatement result=DBUtility.getPreparedStatement(connection, query);
@@ -142,7 +169,7 @@ public class userDAO {
 
 	public List<User> getAllUser(){
 		List<User> userList=new ArrayList<>();
-		String query="select * from user";
+		String query="select * from m_user";
 		PreparedStatement preparedStatement=DBUtility.getPreparedStatement(connection, query);
 		try {
 			ResultSet result=DBUtility.getResult(preparedStatement);

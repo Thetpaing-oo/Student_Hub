@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="ucstt.classmanagement.*,java.util.*"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,6 +45,19 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$.get('FetchClassID');
+	$.get('FetchSubjectCode');
+	$("#classCode").change(function(){
+		var selectedOption=$(this).val();
+		console.log("selectedOption: ",selectedOption);
+		$.ajax({
+			type:"POST",
+			url:"LoadAttandanceData",
+			data:{selectedOption:selectedOption},
+			success:function(){
+				console.log("Loading attandance data passed.");
+			}
+		});
+	});
 });
 </script>
     <div class="page-wrapper">
@@ -148,7 +162,7 @@ $(document).ready(function(){
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="row m-t-25">
-                        <form>
+                        <form action="/Student_Hub/Acknowledge" method="post">
                         <div class="col-md-12">
                                 <!-- DATA TABLE -->
                                 <h3 class="title-5 m-b-35">Attandance Managing</h3>
@@ -156,18 +170,25 @@ $(document).ready(function(){
                                 <div class="table-data__tool">
                                     <div class="table-data__tool-left">
                                         <div class="rs-select2--light rs-select2--md">
-                                            <select class="js-select2" name="property">
+                                            <select class="js-select2" id="classCode">
                                                 <option selected="selected">Class code</option>
                                                 <c:forEach items="${classNoList}" var="data">
                                                 <option value="${data}">${data}</option>
                                                 </c:forEach>
                                             </select>
+
+                                            <select class="js-select2" name="subjectCode" id="subjectCode">
+                                                <option selected="selected">Subject Code</option>
+                                                <c:forEach items="${subjectCodeList}" var="data">
+                                                <option value="${data}">${data}</option>
+                                                </c:forEach>
+                                            </select>
                                             <div class="dropDownSelect2"></div>
                                         </div>
-
+                                        <input type="text" name="totalCount" value="${fn:length(studentList)}" hidden/>
                                     </div>
                                     <div class="table-data__tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" type="submit" data-toggle="modal" data-target="#staticModal">
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" type="submit">
                                             <i class="zmdi zmdi-plus"></i>Acknowledge</button>
                                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                             <a href="TR_Attandance.jsp" class="btn btn-warning">Reset</a>
@@ -193,65 +214,23 @@ $(document).ready(function(){
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <c:forEach items="${studentList}" var="student" varStatus="status">
                                             <tr class="tr-shadow">
                                                 <td>
                                                     <label class="au-checkbox">
-                                                        <input type="checkbox">
+                                                        <input type="checkbox" name="checked${status.index+1}">
                                                         <span class="au-checkmark"></span>
                                                     </label>
                                                 </td>
-                                                <td>STU001</td>
-                                                <td>Lori Lynch</td>
+                                                <td>${student.rollNo}<input type="text" name="studID${status.index+1}" value="${student.studId}" hidden></td>
+                                                <td>${student.name}</td>
                                                 <td>
-                                                    <span class="block-email">lori@example.com</span>
+                                                    <span class="block-email">${student.email}</span>
                                                 </td>
-                                                <td class="desc"><input type="text" name="reason" placeholder="Describse his/her reason"></td>
+                                                <td class="desc"><input type="text" placeholder="Describse his/her reason"></td>
                                             </tr>
                                             <tr class="spacer"></tr>
-                                            <tr class="tr-shadow">
-                                                <td>
-                                                    <label class="au-checkbox">
-                                                        <input type="checkbox">
-                                                        <span class="au-checkmark"></span>
-                                                    </label>
-                                                </td>
-                                                <td>STU004</td>
-                                                <td>Lori Lynch</td>
-                                                <td>
-                                                    <span class="block-email">lori@example.com</span>
-                                                </td>
-                                                <td class="desc"><input type="text" name="reason" placeholder="Describse his/her reason"></td>
-                                            </tr>
-                                            <tr class="spacer"></tr>
-                                            <tr class="tr-shadow">
-                                                <td>
-                                                    <label class="au-checkbox">
-                                                        <input type="checkbox">
-                                                        <span class="au-checkmark"></span>
-                                                    </label>
-                                                </td>
-                                                <td>STU002</td>
-                                                <td>Lori Lynch</td>
-                                                <td>
-                                                    <span class="block-email">lori@example.com</span>
-                                                </td>
-                                                <td class="desc"><input type="text" name="reason" placeholder="Describse his/her reason"></td>
-                                            </tr>
-                                            <tr class="spacer"></tr>
-                                            <tr class="tr-shadow">
-                                                <td>
-                                                    <label class="au-checkbox">
-                                                        <input type="checkbox">
-                                                        <span class="au-checkmark"></span>
-                                                    </label>
-                                                </td>
-                                                <td>STU003</td>
-                                                <td>Lori Lynch</td>
-                                                <td>
-                                                    <span class="block-email">lori@example.com</span>
-                                                </td>
-                                                <td class="desc"><input type="text" name="reason" placeholder="Describse his/her reason"></td>
-                                            </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

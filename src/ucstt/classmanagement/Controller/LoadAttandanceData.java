@@ -1,8 +1,6 @@
 package ucstt.classmanagement.Controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,21 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import ucstt.classmanagement.DAO.ClassDAO;
-import ucstt.classmanagement.Model.ClassData;
+import ucstt.classmanagement.DAO.StudentDAO;
+import ucstt.classmanagement.Model.Student;
 
 /**
- * Servlet implementation class FetchClasssID
+ * Servlet implementation class LoadAttandanceData
  */
-@WebServlet("/FetchClassID")
-public class FetchClassID extends HttpServlet {
+@WebServlet("/LoadAttandanceData")
+public class LoadAttandanceData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FetchClassID() {
+    public LoadAttandanceData() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +33,7 @@ public class FetchClassID extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ClassDAO classDAO=new ClassDAO();
-		List<ClassData> classDataList=classDAO.Retrieval();
-		List<String> classNoList=new ArrayList<>();
-		for(ClassData classData : classDataList){
-			classNoList.add(classData.getClassNo());
-		}
-		request.getServletContext().setAttribute("classNoList", classNoList);
-		request.getRequestDispatcher("TR_Attandance.jsp").include(request, response);
+
 	}
 
 	/**
@@ -49,6 +41,14 @@ public class FetchClassID extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String classCode=request.getParameter("selectedOption");
+		System.out.println("ClassCode : "+classCode);
+
+		StudentDAO studentDAO=new StudentDAO();
+		List<Student> studentList=studentDAO.getAttandanceData(classCode);
+
+		request.getServletContext().setAttribute("studentList", studentList);
+		request.getRequestDispatcher("TR_Attandance.jsp").include(request, response);
 	}
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,27 +35,110 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+    #singelBarChart {
+  max-width: 650px;
+  margin: 35px auto;
+  max-height: 400px;
+}
+#bieChart{
+max-width:650px;
+margin:35px auto;
+max-height: 400px;
+}
+    </style>
 </head>
 <body>
+<%-- <c:set var="weeklyData" value="${weeklyDataSeries}"/>
+<c:set var="monthlyData" value="${monthlyDataSeries}"/> --%>
 <script type="text/javascript">
-try {
-    var arrow = $('.js-arrow');
-    arrow.each(function () {
-      var that = $(this);
-      that.on('click', function (e) {
-        e.preventDefault();
-        that.find(".arrow").toggleClass("up");
-        that.toggleClass("open");
-        that.parent().find('.js-sub-list').slideToggle("250");
-      });
-    });
+$(document).ready(function(){
+	$.post('AttandanceReport');
 
-  } catch (error) {
-    console.log(error);
-  }
+	var weekArrayV2=[];
+
+	<c:forEach items="${weeklyDataSeries}" var="data" varStatus="status">
+	weekArrayV2[<c:out value="${status.index}" />]=<c:out value="${data}" />;
+	</c:forEach>
+
+	console.log(weekArrayV2);
+
+	var monthArrayV2=[];
+
+	<c:forEach items="${monthlyDataSeries}" var="data" varStatus="status">
+	monthArrayV2[<c:out value="${status.index}" />]=<c:out value="${data}" />;
+	</c:forEach>
+
+	console.log(monthArrayV2);
+
+	var options = {
+			  chart: {
+			    type: 'bar'
+			  },
+			  series: [{
+			    name: 'times',
+			    data: weekArrayV2
+			  }],
+			  xaxis: {
+			    categories: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+			  }
+			}
+	var bieOptions={
+			chart: {
+			      type: 'donut'
+			    },
+			    plotOptions: {
+			        pie: {
+			          customScale: 0.8
+			        }
+			      },
+			 series: monthArrayV2,
+			 labels: ['Present', 'Total All', 'Total due', 'Absent']
+	}
+
+			var chart = new ApexCharts(document.querySelector("#singelBarChart"), options);
+
+			chart.render();
+
+			/* var bieChart=new ApexCharts(document.querySelector("#bieChart"),bieOptions);
+
+			bieChart.render(); */
+
+			const chartData = {
+					  series: monthArrayV2,
+					  labels: ['Total Due : ${TotalDue} times', 'Total Attandance : ${TotalAttandance} times', 'Present', 'Absent'],
+					};
+
+					const chartOptions = {
+					  chart: {
+					    type: 'donut',
+					  },
+					  dataLabels: {
+					    enabled: true,
+					    formatter: function (val, opts) {
+					    	var total = opts.w.globals.seriesTotals.reduce((a,b) => a + b, 0);
+
+					        // Calculate the percentage from the data value (val)
+					        var percentage = (val / total) * 100;
+
+					        // Customize the percentage format, e.g., show two decimal places
+					        return percentage.toFixed(2) + '%';
+					    }
+					  },
+					  labels: chartData.labels,
+					  series: chartData.series
+					};
+
+					const donutChart = new ApexCharts(document.querySelector("#bieChart"), chartOptions);
+					donutChart.render();
+
+});
+
 </script>
-    <div class="page-wrapper">
+ <div class="page-wrapper">
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar2">
             <div class="logo">
@@ -162,7 +246,7 @@ try {
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">Compus Activities</h2>
+                                    <h2 class="title-1">Attandance</h2>
 
                                 </div>
                             </div>
@@ -178,119 +262,23 @@ try {
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="row m-t-25">
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Activities 1</h2>
-                                                <span>members online</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
-                                        </div>
+                            <div class="col-md-6">
+                                <div class="au-card m-b-30">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2 m-b-40">Weekly Attandance</h3>
+                                        <div id="singelBarChart"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Activities 2</h2>
-                                                <span>items solid</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
-                                        </div>
+                            <div class="col-md-6">
+                                <div class="au-card m-b-30">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2 m-b-40">Monthly Attandance</h3>
+                                        <h5>Total All : ${TotalDue} times</h5>
+                                        <div id="bieChart"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c3">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Activities 3</h2>
-                                                <span>this week</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c4">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Activities 4</h2>
-                                                <span>total earnings</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="margin-top: -50px;">
-                        <div class="row">
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">Activities 1</h2>
-                                    <span class="desc">members online</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-account-o"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">Activitie 2</h2>
-                                    <span class="desc">items sold</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-shopping-cart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">Activities 3</h2>
-                                    <span class="desc">this week</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">Activities 4</h2>
-                                    <span class="desc">total earnings</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-money"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -312,8 +300,7 @@ try {
         </div>
 
     </div>
-
-    <!-- Jquery JS-->
+ <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
@@ -340,6 +327,5 @@ try {
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
-
 </body>
 </html>

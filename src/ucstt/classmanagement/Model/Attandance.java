@@ -1,10 +1,19 @@
 package ucstt.classmanagement.Model;
 
+import java.sql.Date;
+
 public class Attandance {
 int id;
 String studentId;
 String subjectCode;
 int count;
+Date date;
+public Date getDate() {
+	return date;
+}
+public void setDate(Date date) {
+	this.date = date;
+}
 public int getId() {
 	return id;
 }

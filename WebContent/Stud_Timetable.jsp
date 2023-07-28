@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,27 +35,18 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" type="text/javascript"></script>
 
 </head>
 <body>
 <script type="text/javascript">
-try {
-    var arrow = $('.js-arrow');
-    arrow.each(function () {
-      var that = $(this);
-      that.on('click', function (e) {
-        e.preventDefault();
-        that.find(".arrow").toggleClass("up");
-        that.toggleClass("open");
-        that.parent().find('.js-sub-list').slideToggle("250");
-      });
-    });
-
-  } catch (error) {
-    console.log(error);
-  }
+$(document).ready(function(){
+	console.log("Loaded");
+	$.post('TimetableData');
+});
 </script>
-    <div class="page-wrapper">
+ <div class="page-wrapper">
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar2">
             <div class="logo">
@@ -74,7 +66,7 @@ try {
                 <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="index2.html">
+                            <a class="js-arrow" href="StudentHomePage.jsp">
                                 <i class="fas fa-tachometer-alt"></i>Home
                             </a>
                         </li>
@@ -162,7 +154,7 @@ try {
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">Compus Activities</h2>
+                                    <h2 class="title-1">Timetable</h2>
 
                                 </div>
                             </div>
@@ -174,124 +166,43 @@ try {
             <!-- END BREADCRUMB-->
 
             <!-- STATISTIC-->
-            <section class="statistic">
+            <section class="statistic" style="margin-top:20px;">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="row m-t-25">
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Activities 1</h2>
-                                                <span>members online</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-shopping-cart"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Activities 2</h2>
-                                                <span>items solid</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row w-100"><div class="col" style="float:left;"><h4 class="m-b-25">Class Code : ${ClassCodeNo}</h4></div><div class="col" style="position:absolute;left:80%;top:2%;margin-left:50px;"></div></div>
+                                    <div class="table-responsive table--no-card m-b-20">
+                                    <div class="table-wrapper-scroll-x table-wrapper-scroll-y my-custom-scrollbar">
+                                        <table class="table table-borderless table-hover" width="100%" height="100%">
+                                            <thead style="background-color: deepskyblue;color:aliceblue;">
+                                                <tr>
+                                                    <th style="text-align: center;"></th>
+                                                    <th style="text-align: center;">Subject<br/><8:30-9:30></th>
+                                                    <th style="text-align: center;">Subject<br/><9:30-10:30></th>
+                                                    <th style="text-align: center;">Subject<br/><10:30-11:30></th>
+                                                    <th style="text-align: center;">Subject<br/><12:30-01:30></th>
+                                                    <th style="text-align: center;">Subject<br/><01:30-02:30></th>
+                                                    <th style="text-align: center;">Subject<br/><03:30-04:30></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${TimetableList}" var="data">
+                                            <tr>
+                                                    <td></td>
+                                                    <td style="text-align: center;">${data.subjectCode1}</td>
+                                                    <td style="text-align: center;">${data.subjectCode2}</td>
+                                                    <td style="text-align: center;">${data.subjectCode3}</td>
+                                                    <td style="text-align: center;">${data.subjectCode4}</td>
+                                                    <td style="text-align: center;">${data.subjectCode5}</td>
+                                                    <td style="text-align: center;">${data.subjectCode6}</td>
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c3">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Activities 3</h2>
-                                                <span>this week</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c4">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="zmdi zmdi-money"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Activities 4</h2>
-                                                <span>total earnings</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="margin-top: -50px;">
-                        <div class="row">
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">Activities 1</h2>
-                                    <span class="desc">members online</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-account-o"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">Activitie 2</h2>
-                                    <span class="desc">items sold</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-shopping-cart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">Activities 3</h2>
-                                    <span class="desc">this week</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">Activities 4</h2>
-                                    <span class="desc">total earnings</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-money"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -313,7 +224,8 @@ try {
 
     </div>
 
-    <!-- Jquery JS-->
+
+ <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
@@ -340,6 +252,5 @@ try {
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
-
 </body>
 </html>

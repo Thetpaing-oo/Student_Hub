@@ -35,6 +35,9 @@
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
 
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" type="text/javascript"></script>
+
 </head>
 <style>
 /* Full-width input fields */
@@ -187,6 +190,46 @@ padding:16px;
      width: 100%;
   }
 }
+.profile-pic {
+    width: 200px;
+    max-height: 200px;
+    display: inline-block;
+}
+
+.file-upload {
+    display: none;
+}
+.circle {
+    border-radius: 100% !important;
+    overflow: hidden;
+    width: 128px;
+    height: 128px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: absolute;
+    top: 72px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.p-image {
+  position: absolute;
+  top: 167px;
+  right: 50%;
+  color: #666666;
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.p-image:hover {
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.upload-button {
+  font-size: 1.2em;
+}
+
+.upload-button:hover {
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+  color: #999;
+}
 </style>
 <body>
 <script>
@@ -199,6 +242,30 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+$(document).ready(function() {
+
+
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.profile-pic').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+    $(".file-upload").on('change', function(){
+        readURL(this);
+    });
+
+    $(".upload-button").on('click', function() {
+       $(".file-upload").click();
+    });
+});
 </script>
     <div class="page-wrapper">
         <!-- MENU SIDEBAR-->
@@ -212,10 +279,21 @@ window.onclick = function(event) {
             <div class="menu-sidebar2__content js-scrollbar1">
                 <div class="account2">
                     <div class="image img-cir img-120">
-                        <img src="images/icon/avatar-big-01.jpg" alt="John Doe" />
+                        <div class="row">
+     <div class="circle">
+       <img class="profile-pic" src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg">
+
+     </div>
+     <div class="p-image">
+       <i class="fa fa-camera upload-button"></i>
+        <input class="file-upload" type="file" accept="image/*"/>
+     </div>
+</div>
                     </div>
+                    <div style="margin-top:25px;">
                     <h4 class="name">john doe</h4>
                     <a href="#">Administrator</a>
+                    </div>
                 </div>
                 <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">

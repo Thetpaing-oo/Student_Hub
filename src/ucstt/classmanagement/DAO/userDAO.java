@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.mysql.cj.xdevapi.Statement;
 
+import ucstt.classmanagement.Model.Posts;
 import ucstt.classmanagement.Model.User;
 import ucstt.classmanagement.Utility.DBUtility;
 
@@ -30,6 +31,60 @@ public class userDAO {
 		}
 		return null;
 		
+	}
+	public List<Posts> getAllPosts(){
+	    List<Posts> postList=new ArrayList<>();
+	    String query="select * from x_school_activity";
+	    PreparedStatement preparedStatement=DBUtility.getPreparedStatement(connection, query);
+	    try {
+	      ResultSet result=DBUtility.getResult(preparedStatement);
+	      ResultSetMetaData columnName=(ResultSetMetaData) result.getMetaData(); //to getColumnName
+	      while(result.next()) {
+	        Posts post=new Posts();
+	        post.setId(result.getString(columnName.getColumnName(1)));
+	        post.setCaption(result.getString(columnName.getColumnName(2)));
+	       
+	        post.setcreatedBy(result.getString(columnName.getColumnName(3)));
+	        post.setupdateBy(result.getString(columnName.getColumnName(4)));
+	        post.setcreationTimestamp(result.getString(columnName.getColumnName(5)));
+	        post.setupdatationTimestamp(result.getString(columnName.getColumnName(6)));
+	        post.setAbst(result.getString(columnName.getColumnName(7)));
+	        post.setAffair(result.getString(columnName.getColumnName(8)));
+	        System.out.println(columnName.getColumnName(7));
+
+	        postList.add(post);
+	      }
+	    } catch (SQLException e) {
+	      System.out.println("Retrieve all Failed.");
+	    }
+	    return postList;
+	  }
+	
+	public ResultSet getPosts() {
+		String query="select * from x_school_activity";
+		PreparedStatement result=DBUtility.getPreparedStatement(connection, query);
+		try {
+			ResultSet rs=result.executeQuery();
+			return rs;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
+	
+	public boolean postUpload(String query) {
+		PreparedStatement stmt=DBUtility.getPreparedStatement(connection, query);
+		try {
+			stmt.execute();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public ResultSet getClassmangenent() {

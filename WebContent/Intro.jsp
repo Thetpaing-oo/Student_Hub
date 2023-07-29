@@ -51,7 +51,7 @@
   <div class="h-70 p-3">
   <div class="row mt-2">
     <div class="col-12">
-      <form>
+      <form action="Login.jsp">
         <div class="form-group row">
           <div class="col-12">
             <div class="card-deck">
@@ -134,8 +134,8 @@
             </div>
           </div>
         </div>
-  <small>Not Already Have Registered?&nbsp;&nbsp;<a href="#"><u><i>Register</i></u></a></small>
-  <div class="d-flex justify-content-center"><button type="button" class="btn btn-md" style="color:white;background-color:seagreen;">&nbsp;&nbsp;&nbsp;Next&nbsp;&nbsp;&nbsp;</button></div>
+  <small>Not Already Have Registered?&nbsp;&nbsp;<a href=""><u><i>Register</i></u></a></small>
+  <div class="d-flex justify-content-center"><button type="submit" class="btn btn-md" style="color:white;background-color:seagreen;" >&nbsp;&nbsp;&nbsp;Next&nbsp;&nbsp;&nbsp;</button></div>
       </form>
     </div>
   </div>
